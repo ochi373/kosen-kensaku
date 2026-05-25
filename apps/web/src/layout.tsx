@@ -8,8 +8,8 @@ export function Layout() {
             <main>
                 <Outlet />
             </main>
-            <footer className="py-13 bg-secondary text-center">
-                ©高専機構, 2026
+            <footer className="py-13 bg-secondary text-center text-xs md:text-sm text-secondary-foreground">
+                Copyright © National Institute of Technology. All rights reserved.
             </footer>
         </>
     )

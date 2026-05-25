@@ -12,6 +12,7 @@ export function useSelfTestForm() {
         defaultValues: {
             areas: [],
             subjects: [],
+            qualifications: [],
             others: []
         },
 

@@ -1,34 +1,46 @@
 import { useMemo } from "react"
 import { useSearchParams } from "react-router"
-import { KOSEN_LIST } from "./kosen.constants"
+import { ResultTitle } from "./title";
+import { Kosen } from "./kosen";
+import { KOSEN_LIST } from "@/data/kosen";
 
-const countIntersection = <T extends string | number>(a: readonly T[], b: readonly T[]) => {
+const intersect = <T extends string | number>(a: readonly T[], b: readonly T[]) => {
   const set = new Set(a);
-  return b.filter(x => set.has(x)).length;
+  return b.filter(x => set.has(x))
 };
+
+// 本当は診断ページから取得するべき
+const PARAM_KEYS = ["areas", "subjects", "others"]
 
 export function ResultPage() {
     const [searchParams] = useSearchParams()
 
-    const areas = searchParams.get("areas")?.split(',') || []
-    const subjects = searchParams.get("subjects")?.split(',') || []
-    const others = searchParams.get("others")?.split(',') || []
+    const [areas, subjects, others] = PARAM_KEYS.map(p => {
+        return getSelections(searchParams, p)
+    })
 
     const matchedKosenList = useMemo(() => {
         const result = []
 
         for (const k of KOSEN_LIST) {
             // エリアは選択されているときのみ、必須条件となる
-            if (areas.length > 0 && !areas.includes(k.area.value)) continue
+            if (areas.length > 0 && !areas.includes(k.area)) continue
 
-            // 分野やこだわりポイントのヒット数
-            const s = countIntersection(subjects, k.subjects.map(s => s.value))
-            const o = countIntersection(others, k.others.map(o => o.value))
-            const counts = s + o
+            // 分野やこだわりポイントのヒット
+            const a = intersect(areas, [k.area])
+            const s = intersect(subjects, k.subjects)
+            const o = intersect(others, k.others)
+
+            const hit =
+                a.length > 0 ||
+                s.length > 0 ||
+                (others.length > 0 && o.length === others.length)
+                
+            if (!hit) continue
         
             result.push({
                 ...k,
-                matchedCounts: counts
+                matchedList: [...a, ...s, ...o]
             })
         }
 
@@ -36,13 +48,16 @@ export function ResultPage() {
     }, [areas, subjects, others])
 
     return (
-        <p>
-            適校診断の結果が表示されます。
-            <br />
-            高専選びのヒントにしてみよう！
-            <span>
-                {matchedKosenList.map(k => k.name).join(', ')}
-            </span>
-        </p>
+        <section>
+            <ResultTitle />
+            {matchedKosenList.map(k => (
+                <Kosen key={k.name} {...k} />
+            ))}
+        </section>
     )
+}
+
+function getSelections(params: URLSearchParams, paramKey: string) {
+    const v = params.get(paramKey)
+    return v ? v.split(',') : []
 }
