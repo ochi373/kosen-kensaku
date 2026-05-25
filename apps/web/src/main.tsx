@@ -25,7 +25,7 @@ if (root == null) throw new Error();
 createRoot(root).render(
 	<StrictMode>
 		<ThemeProvider>
-			<BrowserRouter>
+			<BrowserRouter basename="/kosen-kensaku/">
 				<Routes>
 					<Route element={<Layout />}>
 						<Route index element={<SelfTestPage />} />
