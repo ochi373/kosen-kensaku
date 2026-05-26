@@ -19,11 +19,13 @@ export function ResultPage() {
     }, [areas, subjects, others])
 
     return (
-        <section>
+        <section className="space-y-6">
             <ResultTitle />
-            {matchedKosenList.map(k => (
-                <Kosen key={k.name} {...k} />
-            ))}
+            <div className="p-4 flex flex-wrap gap-4 justify-start">
+                {matchedKosenList.map(k => (
+                    <Kosen key={k.name} className="w-full sm:flex-1 sm:min-w-76 sm:max-w-sm" {...k} />
+                ))}
+            </div>
         </section>
     )
 }
