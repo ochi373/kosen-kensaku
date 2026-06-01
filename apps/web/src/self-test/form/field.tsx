@@ -58,7 +58,7 @@ export function SelfTestFormField({
                     <FieldGroup className={cn(gridColsClass, "grid gap-2")} data-slot="checkbox-group">
                         {options.map(o =>
                             <Field data-invalid={fieldState.invalid} key={o.value}>
-                                <FieldLabel>
+                                <FieldLabel className="shadow-sm shadow-black/20 hover:shadow-lg transition-shadow cursor-pointer has-data-checked:bg-primary has-data-checked:text-primary-foreground">
                                     <Field orientation="horizontal">
                                         <Checkbox
                                             id={o.value}
