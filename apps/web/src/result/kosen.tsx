@@ -1,26 +1,34 @@
 import type { KOSEN_LIST } from "@/data/kosen"
 import { KosenBadges } from "./kosen.badges"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@workspace/ui/components/card"
 
 type Props = typeof KOSEN_LIST[number] & {
-    matchedList: string[]
+    matchedList: string[],
+    className?: string,
 }
 
-export function Kosen({ matchedList, ...kosen }: Props) {
+export function Kosen({ matchedList, className, ...kosen }: Props) {
     return (
-        <section className="mt-5 mx-5">
-            <h2 className="text-lg text-bold">{kosen.name}</h2>
+        <Card className={className}>
+            <CardHeader>
+            <CardTitle className="text-lg text-bold">{kosen.name}</CardTitle>
             <img
                 className="block h-48 w-full object-cover"
                 src={kosen.image}
             />
-            <KosenBadges className="mt-5" matchedList={matchedList} {...kosen} />
+            </CardHeader>
+            <CardContent>
+            <KosenBadges matchedList={matchedList} {...kosen} />
+            </CardContent>
+            <CardFooter>
             <a
                 href={kosen.href}
                 target="_blank"
-                className="mt-5 ml-auto w-fit text-right px-3 text-sm border-b border-primary"
+                className="ml-auto w-fit text-right px-3 text-sm border-b border-primary"
             >
                 公式ページへ
             </a>
-        </section>
+            </CardFooter>
+        </Card>
     )
 }

@@ -2,12 +2,7 @@ import { useMemo } from "react"
 import { useSearchParams } from "react-router"
 import { ResultTitle } from "./title";
 import { Kosen } from "./kosen";
-import { KOSEN_LIST } from "@/data/kosen";
-
-const intersect = <T extends string | number>(a: readonly T[], b: readonly T[]) => {
-  const set = new Set(a);
-  return b.filter(x => set.has(x))
-};
+import { match } from "./_match";
 
 // 本当は診断ページから取得するべき
 const PARAM_KEYS = ["areas", "subjects", "others"]
@@ -20,39 +15,17 @@ export function ResultPage() {
     })
 
     const matchedKosenList = useMemo(() => {
-        const result = []
-
-        for (const k of KOSEN_LIST) {
-            // エリアは選択されているときのみ、必須条件となる
-            if (areas.length > 0 && !areas.includes(k.area)) continue
-
-            // 分野やこだわりポイントのヒット
-            const a = intersect(areas, [k.area])
-            const s = intersect(subjects, k.subjects)
-            const o = intersect(others, k.others)
-
-            const hit =
-                a.length > 0 ||
-                s.length > 0 ||
-                (others.length > 0 && o.length === others.length)
-                
-            if (!hit) continue
-        
-            result.push({
-                ...k,
-                matchedList: [...a, ...s, ...o]
-            })
-        }
-
-        return result
+        return match(areas, subjects, others)
     }, [areas, subjects, others])
 
     return (
-        <section>
+        <section className="space-y-6">
             <ResultTitle />
-            {matchedKosenList.map(k => (
-                <Kosen key={k.name} {...k} />
-            ))}
+            <div className="p-4 flex flex-wrap gap-4 justify-start">
+                {matchedKosenList.map(k => (
+                    <Kosen key={k.name} className="w-full sm:flex-1 sm:min-w-76 sm:max-w-sm" {...k} />
+                ))}
+            </div>
         </section>
     )
 }
