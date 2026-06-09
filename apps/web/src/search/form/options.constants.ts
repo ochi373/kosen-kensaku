@@ -1,5 +1,5 @@
 import type { ComponentProps } from "react";
-import type { SelfTestFormField } from "./field";
+import type { SearchFormFieldset } from "./fieldset";
 import { SUBJECTS } from "@/data/subjects"
 import { CONDITIONS } from "@/data/conditions";
 
@@ -67,7 +67,7 @@ export const SELF_TEST_FORM = [
         },
         options: CONDITIONS
     }
-] as const satisfies Omit<ComponentProps<typeof SelfTestFormField>, "form">[]
+] as const satisfies Omit<ComponentProps<typeof SearchFormFieldset>, "form">[]
 
 type T = typeof SELF_TEST_FORM
 

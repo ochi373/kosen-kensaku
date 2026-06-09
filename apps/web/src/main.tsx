@@ -5,7 +5,7 @@ import "@workspace/ui/globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 
 import { BrowserRouter, Route, Routes } from "react-router";
-import { SelfTestPage } from "./self-test/page";
+import { SearchPage } from "./search/page";
 import { ResultPage } from "./result/page";
 import { Layout } from "./layout";
 
@@ -28,7 +28,7 @@ createRoot(root).render(
 			<BrowserRouter basename="/kosen-kensaku/">
 				<Routes>
 					<Route element={<Layout />}>
-						<Route index element={<SelfTestPage />} />
+						<Route index element={<SearchPage />} />
 						<Route path="result" element={<ResultPage />} />
 					</Route>
 				</Routes>

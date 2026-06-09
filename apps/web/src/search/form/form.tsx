@@ -1,17 +1,17 @@
 "use client"
 
 import { Button } from "@workspace/ui/components/button"
-import { SelfTestFormField } from "./field"
+import { SearchFormFieldset } from "./fieldset"
 import { SELF_TEST_FORM } from "./options.constants"
-import { useSelfTestForm } from "./use-form"
-import type { SelfTestSchema } from "./schema"
+import { useSearchForm } from "./use-form"
+import type { ConditionsSchema } from "./schema"
 import { createSearchParams, useNavigate } from "react-router"
 
-export function SelfTestForm() {
-    const form = useSelfTestForm()
+export function SearchForm() {
+    const form = useSearchForm()
     const navigate = useNavigate()
 
-    const onSubmit = (d: SelfTestSchema) => {
+    const onSubmit = (d: ConditionsSchema) => {
         const search = createSearchParams({
             areas: d.areas.join(","),
             subjects: d.subjects.join(","),
@@ -27,7 +27,7 @@ export function SelfTestForm() {
 
     return (
         <form className="px-8" onSubmit={form.handleSubmit(onSubmit)}>
-            {SELF_TEST_FORM.map((f) => <SelfTestFormField form={form} className="mt-8" {...f} />)}
+            {SELF_TEST_FORM.map((f) => <SearchFormFieldset form={form} className="mt-8" {...f} />)}
             <div className="my-8 flex justify-center">
                 <Button type="submit" size="lg">条件に合う高専を見る</Button>
             </div>

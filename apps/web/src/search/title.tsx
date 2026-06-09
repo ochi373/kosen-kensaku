@@ -1,4 +1,4 @@
-export function SelfTestTitle() {
+export function SearchTitle() {
     return (
         <div className="h-60 bg-linear-to-b from-cyan-500 to-blue-500 flex items-center justify-center">
             <h1 className="text-center block h-fit text-[32px] font-bold text-primary-foreground">
