@@ -2,6 +2,7 @@ import type { ComponentProps } from "react";
 import type { SearchFormFieldset } from "./fieldset";
 import { SUBJECTS } from "@/data/subjects"
 import { CONDITIONS } from "@/data/conditions";
+import { AREAS } from "@/data/areas";
 
 export const SELF_TEST_FORM = [
     {
@@ -22,40 +23,7 @@ export const SELF_TEST_FORM = [
             md: 2,
             lg: 3,
         },
-        options: [
-            {
-                value: "hokkaido",
-                label: "北海道"
-            },
-            {
-                value: "tohoku",
-                label: "東北"
-            },
-            {
-                value: "kanto-shinetsu",
-                label: "関東信越"
-            },
-            {
-                value: "tokai-hokuriku",
-                label: "東海北陸"
-            },
-            {
-                value: "kinki",
-                label: "近畿"
-            },
-            {
-                value: "chugoku",
-                label: "中国"
-            },
-            {
-                value: "shikoku",
-                label: "四国"
-            },
-            {
-                value: "kyusyu-okinawa",
-                label: "九州・沖縄"
-            }
-        ] 
+        options: AREAS
     },
     {
         id: "others",

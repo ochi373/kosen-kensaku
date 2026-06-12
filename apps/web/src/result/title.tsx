@@ -5,7 +5,7 @@ export function ResultTitle() {
                 <span className="pr-2">検索結果</span>
                 <br />
                 <span className="block mt-[6px] text-sm text-primary-foreground/98">
-                    あなたの希望に合う高専はこちら！
+                    あなたの希望に合う国立高専はこちら！
                     <br />高専選びのヒントにしてみよう。
                 </span>
             </h1>
