@@ -13,6 +13,8 @@ import type { useSearchForm } from "./use-form";
 type Option = {
 	value: string; // 文字列
 	label: string;
+	decription?: string;
+	"short-label"?: string;
 };
 
 type Cols = 1 | 2 | 3;
@@ -49,19 +51,29 @@ export function SearchFormFieldset({
 			name={id}
 			control={form.control}
 			render={({ field, fieldState }) => (
-				<FieldSet className={className}>
-					<FieldLegend>{title}</FieldLegend>
+				<FieldSet
+					className={cn(
+						"rounded-[2rem] border border-white/70 bg-white/80 p-4 shadow-[0_20px_70px_rgba(31,52,77,0.08)] backdrop-blur md:p-6",
+						className,
+					)}
+				>
+					<FieldLegend className="mb-4 flex items-end justify-between gap-3 text-xl font-semibold tracking-normal text-slate-950">
+						<span>{title}</span>
+						<span className="hidden text-xs font-medium text-slate-500 sm:inline">
+							{getFieldsetCaption(id)}
+						</span>
+					</FieldLegend>
 					<FieldGroup
-						className={cn(gridColsClass, "grid gap-2")}
+						className={cn(gridColsClass, "grid gap-3")}
 						data-slot="checkbox-group"
 					>
 						{options.map((o) => (
 							<SearchField
 								key={o.value}
+								groupId={id}
 								option={o}
 								field={field}
 								fieldState={fieldState}
-								theme="basic"
 							/>
 						))}
 					</FieldGroup>
@@ -69,6 +81,13 @@ export function SearchFormFieldset({
 			)}
 		/>
 	);
+}
+
+function getFieldsetCaption(id: Props["id"]) {
+	if (id === "subjects") return "興味の入口を広げて選べます";
+	if (id === "areas") return "通いやすさや暮らしも大切な条件";
+	if (id === "others") return "教育制度・学校生活のこだわり";
+	return "";
 }
 
 function getColsClass(p: Props["cols"]) {
