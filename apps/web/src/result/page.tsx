@@ -1,4 +1,4 @@
-import { AiSearchIcon, Database02Icon } from "@hugeicons/core-free-icons";
+import { Database02Icon, SearchIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Button } from "@workspace/ui/components/button";
 import { useMemo } from "react";
@@ -56,10 +56,11 @@ function NoData() {
 				</p>
 				<Button
 					render={<Link to="/" />}
-					className="mt-7 rounded-full bg-slate-950 px-6 hover:bg-sky-700"
+					size="lg"
+					className="h-13 rounded-full bg-slate-950 px-7 text-base text-white shadow-[0_18px_50px_rgba(15,23,42,0.25)] hover:bg-sky-700 dark:bg-sky-500 dark:text-slate-950 dark:hover:bg-sky-400"
 				>
 					<HugeiconsIcon
-						icon={AiSearchIcon}
+						icon={SearchIcon}
 						strokeWidth={1.8}
 						className="size-4"
 					/>
