@@ -64,23 +64,83 @@ export function SearchFormFieldset({
 						</span>
 					</FieldLegend>
 					<FieldGroup
-						className={cn(gridColsClass, "grid gap-3")}
+						className={cn(
+							id === "others" ? "gap-6" : gridColsClass,
+							"grid gap-3",
+						)}
 						data-slot="checkbox-group"
 					>
-						{options.map((o) => (
-							<SearchField
-								key={o.value}
-								groupId={id}
-								option={o}
-								field={field}
-								fieldState={fieldState}
-							/>
-						))}
+						{id === "others"
+							? getConditionGroups(options).map((group) => (
+									<div key={group.title} className="space-y-3">
+										<div className="flex items-center gap-3">
+											<div className="h-px flex-1 bg-linear-to-r from-slate-200 to-transparent" />
+											<p className="shrink-0 rounded-full bg-slate-950 px-3 py-1 text-xs font-bold text-white">
+												{group.title}
+											</p>
+											<div className="h-px flex-1 bg-linear-to-l from-slate-200 to-transparent" />
+										</div>
+										<div className={cn(gridColsClass, "grid gap-3")}>
+											{group.options.map((o) => (
+												<SearchField
+													key={o.value}
+													groupId={id}
+													option={o}
+													field={field}
+													fieldState={fieldState}
+												/>
+											))}
+										</div>
+									</div>
+								))
+							: options.map((o) => (
+									<SearchField
+										key={o.value}
+										groupId={id}
+										option={o}
+										field={field}
+										fieldState={fieldState}
+									/>
+								))}
 					</FieldGroup>
 				</FieldSet>
 			)}
 		/>
 	);
+}
+
+const CONDITION_GROUPS = [
+	{
+		title: "先端技術・専門テーマ",
+		values: ["o1", "o2", "o3", "o4", "o5", "o6", "o7"],
+	},
+	{
+		title: "学科選択・カリキュラム",
+		values: ["o8", "o9", "o10", "o11", "o12", "o13", "o14"],
+	},
+	{
+		title: "挑戦・キャリア形成",
+		values: ["o15", "o16", "o20", "o24", "o25"],
+	},
+	{
+		title: "サポート・学校生活",
+		values: ["o17", "o18", "o19", "o21", "o22", "o23"],
+	},
+	{
+		title: "入試・校風",
+		values: ["o26", "o27", "o28", "o29", "o30"],
+	},
+] as const;
+
+function getConditionGroups(options: Option[]) {
+	const optionMap = new Map(options.map((option) => [option.value, option]));
+
+	return CONDITION_GROUPS.map((group) => ({
+		title: group.title,
+		options: group.values
+			.map((value) => optionMap.get(value))
+			.filter((option): option is Option => Boolean(option)),
+	})).filter((group) => group.options.length > 0);
 }
 
 function getFieldsetCaption(id: Props["id"]) {

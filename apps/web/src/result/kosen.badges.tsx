@@ -14,12 +14,6 @@ export function KosenBadges({ className, matchedList, ...kosen }: Props) {
 	return (
 		// ulのほうがいいけどいったんdivで
 		<div className={cn("flex gap-2 flex-wrap", className)}>
-			<Badge
-				variant={matchedList.includes(kosen.area) ? "default" : "outline"}
-				className="h-7 px-3 text-xs"
-			>
-				{kosen.area}
-			</Badge>
 			{kosen.subjects.map((s) => (
 				<Badge
 					key={s}
