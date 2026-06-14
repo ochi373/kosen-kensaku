@@ -1,6 +1,6 @@
 "use client";
 
-import { AiSearchIcon } from "@hugeicons/core-free-icons";
+import { SearchIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { Button } from "@workspace/ui/components/button";
 import { createSearchParams, useNavigate } from "react-router";
@@ -47,7 +47,7 @@ export function SearchForm() {
 					className="h-13 rounded-full bg-slate-950 px-7 text-base shadow-[0_18px_50px_rgba(15,23,42,0.25)] hover:bg-sky-700"
 				>
 					<HugeiconsIcon
-						icon={AiSearchIcon}
+						icon={SearchIcon}
 						strokeWidth={1.8}
 						className="size-5"
 					/>

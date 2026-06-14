@@ -1,4 +1,4 @@
-import { AiSearchIcon, SchoolIcon } from "@hugeicons/core-free-icons";
+import { SchoolIcon, SearchIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 
 export function SearchTitle() {
@@ -17,20 +17,17 @@ export function SearchTitle() {
 				<h1 className="max-w-3xl text-4xl font-black tracking-normal sm:text-5xl">
 					国立高専検索サイト
 				</h1>
-				<p className="mt-5 max-w-2xl text-base font-medium leading-8 text-slate-200 sm:text-lg">
+				<p className="mt-5 text-base font-medium leading-8 text-slate-200 sm:text-lg">
 					興味のある分野、暮らしたいエリア、学校生活のこだわりから、あなたに合う国立高専を探せます。
 				</p>
 				<div className="mt-8 flex flex-wrap gap-3 text-sm text-slate-200">
 					<span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 backdrop-blur">
 						<HugeiconsIcon
-							icon={AiSearchIcon}
+							icon={SearchIcon}
 							strokeWidth={1.8}
 							className="size-4"
 						/>
 						複数選択OK
-					</span>
-					<span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 backdrop-blur">
-						学科説明つき
 					</span>
 				</div>
 			</div>

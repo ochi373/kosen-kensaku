@@ -13,7 +13,7 @@ import type { useSearchForm } from "./use-form";
 type Option = {
 	value: string; // 文字列
 	label: string;
-	decription?: string;
+	description?: string;
 	"short-label"?: string;
 };
 

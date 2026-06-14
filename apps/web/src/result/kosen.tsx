@@ -13,7 +13,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@workspace/ui/components/card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AREAS } from "@/data/areas";
 import type { KOSEN_LIST } from "@/data/kosen";
 import { KosenBadges } from "./kosen.badges";
@@ -29,6 +29,17 @@ export function Kosen({ matchedList, className, ...kosen }: Props) {
 	const areaLabel =
 		AREAS.find((area) => area.value === kosen.area)?.label ?? kosen.area;
 	const canOpenImage = Boolean(kosen.image) && !imageUnavailable;
+
+	useEffect(() => {
+		if (!isImageOpen) return;
+
+		const { overflow } = document.body.style;
+		document.body.style.overflow = "hidden";
+
+		return () => {
+			document.body.style.overflow = overflow;
+		};
+	}, [isImageOpen]);
 
 	return (
 		<>
@@ -82,11 +93,11 @@ export function Kosen({ matchedList, className, ...kosen }: Props) {
 							</div>
 						) : null}
 					</button>
-					<div className="space-y-2 px-6">
-						<CardTitle className="text-xl font-black tracking-normal text-slate-950">
+					<div className="flex items-start justify-between gap-3 px-6">
+						<CardTitle className="min-w-0 text-xl font-black tracking-normal text-slate-950">
 							{kosen.name}
 						</CardTitle>
-						<div className="inline-flex items-center gap-1.5 rounded-full bg-sky-50 px-3 py-1 text-xs font-bold text-sky-800 ring-1 ring-sky-100">
+						<div className="mt-0.5 inline-flex shrink-0 items-center gap-1.5 rounded-full bg-sky-50 px-3 py-1 text-xs font-bold text-sky-800 ring-1 ring-sky-100">
 							<HugeiconsIcon
 								icon={GoogleMapsIcon}
 								strokeWidth={1.8}
@@ -128,8 +139,8 @@ export function Kosen({ matchedList, className, ...kosen }: Props) {
 						onClick={() => setIsImageOpen(false)}
 						aria-label="拡大表示を閉じる"
 					/>
-					<div className="relative max-h-[92vh] max-w-[96vw] overflow-hidden rounded-2xl bg-white shadow-2xl shadow-slate-950/40">
-						<div className="flex items-center justify-between border-b border-slate-200 px-4 py-3">
+					<div className="relative flex h-[92dvh] w-[96vw] max-w-6xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl shadow-slate-950/40">
+						<div className="flex shrink-0 items-center justify-between border-b border-slate-200 px-4 py-3">
 							<div>
 								<p className="text-sm font-bold text-slate-950">{kosen.name}</p>
 								<p className="text-xs font-medium text-slate-500">RP資料</p>
@@ -147,9 +158,9 @@ export function Kosen({ matchedList, className, ...kosen }: Props) {
 								/>
 							</button>
 						</div>
-						<div className="max-h-[82vh] overflow-auto bg-slate-100 p-2 sm:p-4">
+						<div className="grid min-h-0 flex-1 place-items-center bg-slate-100 p-2 sm:p-4">
 							<img
-								className="mx-auto block max-h-none max-w-none rounded-lg bg-white object-contain shadow-sm"
+								className="block h-full max-h-full w-full max-w-full rounded-lg bg-white object-contain shadow-sm"
 								src={kosen.image}
 								alt={`${kosen.name}のRP資料`}
 								referrerPolicy="no-referrer"

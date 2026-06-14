@@ -3,7 +3,6 @@ import {
 	AiChemistry03Icon,
 	AiComputerIcon,
 	Atom01Icon,
-	BadgeInfoIcon,
 	BridgeIcon,
 	Building05Icon,
 	CargoShipIcon,
@@ -31,7 +30,7 @@ import type {
 type Option = {
 	value: string; // 文字列
 	label: string;
-	decription?: string;
+	description?: string;
 	"short-label"?: string;
 };
 
@@ -86,7 +85,7 @@ export function SearchField({ option, groupId, field, fieldState }: Props) {
 							<FieldTitle className="text-sm font-semibold text-slate-950">
 								{title}
 							</FieldTitle>
-							{caption ? <InfoTip text={caption} /> : null}
+							{/* {caption ? <InfoTip text={caption} /> : null} */}
 						</div>
 						{caption ? (
 							<FieldDescription
@@ -106,22 +105,22 @@ export function SearchField({ option, groupId, field, fieldState }: Props) {
 	);
 }
 
-function InfoTip({ text }: { text: string }) {
-	return (
-		<span className="group/tip relative mt-0.5 inline-flex shrink-0">
-			<span className="grid size-6 place-items-center rounded-full border border-slate-200 bg-white text-slate-500 shadow-sm">
-				<HugeiconsIcon
-					icon={BadgeInfoIcon}
-					strokeWidth={1.8}
-					className="size-3.5"
-				/>
-			</span>
-			<span className="pointer-events-none absolute right-0 top-8 z-20 w-64 rounded-2xl bg-slate-950 px-3 py-2 text-left text-xs font-medium leading-relaxed text-white opacity-0 shadow-2xl shadow-slate-950/20 transition group-hover/tip:opacity-100 group-focus-within/tip:opacity-100">
-				{text}
-			</span>
-		</span>
-	);
-}
+// function InfoTip({ text }: { text: string }) {
+// 	return (
+// 		<span className="group/tip relative mt-0.5 inline-flex shrink-0">
+// 			<span className="grid size-6 place-items-center rounded-full border border-slate-200 bg-white text-slate-500 shadow-sm">
+// 				<HugeiconsIcon
+// 					icon={BadgeInfoIcon}
+// 					strokeWidth={1.8}
+// 					className="size-3.5"
+// 				/>
+// 			</span>
+// 			<span className="pointer-events-none absolute right-0 top-8 z-20 w-64 rounded-2xl bg-slate-950 px-3 py-2 text-left text-xs font-medium leading-relaxed text-white opacity-0 shadow-2xl shadow-slate-950/20 transition group-hover/tip:opacity-100 group-focus-within/tip:opacity-100">
+// 				{text}
+// 			</span>
+// 		</span>
+// 	);
+// }
 
 function getTitle(option: Option, groupId: Props["groupId"]) {
 	if (groupId === "subjects") return option.label.replace(/[【】]/g, "");
@@ -130,7 +129,7 @@ function getTitle(option: Option, groupId: Props["groupId"]) {
 }
 
 function getCaption(option: Option, groupId: Props["groupId"]) {
-	if (groupId === "subjects") return option.decription;
+	if (groupId === "subjects") return option.description;
 	if (groupId === "others") return option.label;
 	if (groupId === "areas") return `${option.label}エリアの国立高専を探す`;
 	return undefined;

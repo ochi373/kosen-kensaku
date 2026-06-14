@@ -4,4 +4,4 @@ import rawSubjects from "@/data/subjects.csv?raw";
 export const SUBJECTS = csvParse(rawSubjects, {
 	header: true,
 	skipEmptyLines: true,
-}).data as { value: string; label: string; decription: string }[];
+}).data as { value: string; label: string; description: string }[];
