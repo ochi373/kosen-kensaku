@@ -7,13 +7,15 @@ import { createSearchParams, useNavigate } from "react-router";
 import { SearchFormFieldset } from "./fieldset";
 import { SELF_TEST_FORM } from "./options.constants";
 import type { ConditionsSchema } from "./schema";
-import { useSearchForm } from "./use-form";
+import { saveSearchFormValues, useSearchForm } from "./use-form";
 
 export function SearchForm() {
 	const form = useSearchForm();
 	const navigate = useNavigate();
 
 	const onSubmit = (d: ConditionsSchema) => {
+		saveSearchFormValues(d);
+
 		const search = createSearchParams({
 			areas: d.areas.join(","),
 			subjects: d.subjects.join(","),
