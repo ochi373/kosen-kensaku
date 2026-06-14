@@ -61,6 +61,7 @@ export function SearchFormFieldset({
 								option={o}
 								field={field}
 								fieldState={fieldState}
+								theme="basic"
 							/>
 						))}
 					</FieldGroup>
