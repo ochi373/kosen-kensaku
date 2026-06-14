@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 
 import "@workspace/ui/globals.css";
 
-import { BrowserRouter, Route, Routes } from "react-router";
+import { HashRouter, Route, Routes } from "react-router";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { Layout } from "./layout";
 import { ResultPage } from "./result/page";
@@ -25,14 +25,14 @@ if (root == null) throw new Error();
 createRoot(root).render(
 	<StrictMode>
 		<ThemeProvider>
-			<BrowserRouter basename="/kosen-kensaku/">
+			<HashRouter>
 				<Routes>
 					<Route element={<Layout />}>
 						<Route index element={<SearchPage />} />
 						<Route path="result" element={<ResultPage />} />
 					</Route>
 				</Routes>
-			</BrowserRouter>
+			</HashRouter>
 		</ThemeProvider>
 	</StrictMode>,
 );
