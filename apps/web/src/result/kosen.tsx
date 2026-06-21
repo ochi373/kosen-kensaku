@@ -117,7 +117,7 @@ export function Kosen({ matchedList, className, ...kosen }: Props) {
 						rel="noreferrer"
 						className="ml-auto inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-right text-sm font-semibold text-slate-800 shadow-sm transition hover:border-sky-300 hover:text-sky-700"
 					>
-						公式ページへ
+						公式HPへ
 						<HugeiconsIcon
 							icon={SquareArrowRight01Icon}
 							strokeWidth={1.8}
