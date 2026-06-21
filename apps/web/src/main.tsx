@@ -9,17 +9,6 @@ import { Layout } from "./layout";
 import { ResultPage } from "./result/page";
 import { SearchPage } from "./search/page";
 
-/** ===================================
- * 疑似的なパスワード保護をかけていますが
- * 非常に脆弱なため、機密情報を含めないでください。
- *  =================================== */
-const __unsafe__password = prompt("Enter the password:");
-if (__unsafe__password !== "password") {
-	alert("Incorrect password. The application will now exit.");
-	throw new Error("Incorrect password");
-}
-/** =================================== */
-
 const root = document.getElementById("root");
 if (root == null) throw new Error();
 createRoot(root).render(
